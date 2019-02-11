@@ -1,0 +1,44 @@
+<h3> User Settings </h3>
+
+{{#if errorMessage}}
+  <p class="error-message">
+    {{ errorMessage }}
+  </p>
+{{/if}}
+
+<form action="/usersettings" method="post">
+  <div>
+    <label for="name-input"> Name: </label>
+    <input type="name" name="name" id="name-input" placeholder="Antônio Silva">
+  </div>
+
+  <div>
+    <label for="email-input"> Email </label>
+    <input type="email" name="email" id="email-input" placeholder="e.g., antoniosilva@gmail.com">
+  </div>
+
+  <div>
+    <label for="password-input"> Password </label>
+    <input type="password" name="password" id="password-input"
+      placeholder="e.g., ••••••••••••">
+  </div>
+
+  <div>
+    <label for="address-input"> Name: </label>
+    <input type="address" name="address" id="address-input" placeholder="Rua das Cajazeiras">
+  </div>
+
+  <select name="type" value="{{course.type}}">
+    {{!-- {{#each courses}} --}}
+      <option value="name"> Python </option>
+    {{!-- {{/each}} --}}
+  </select>
+
+  {{!-- <select name="type" value="{{course.type}}"> --}}
+    {{!-- {{#each courses}} --}}
+      {{!-- <option value="name"> {{this.courses.name}} </option> --}}
+    {{!-- {{/each}} --}}
+  {{!-- </select> --}}
+
+  <button>Update</button>
+</form>
