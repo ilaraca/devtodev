@@ -18,12 +18,11 @@
 
   {{#each courses }}
     <div>
-        <label for="course">{{courses.name}}, {{user.course}}</label>
-        <input type="checkbox" value="{{courses.id}}" name="course" >
-    {{/each}}
+        <input type="checkbox" value="{{this.id}}" name="course" >
+        <label for="course">{{this.name}}</label>
     </div>
   {{/each}}
-  
+
   <button>Update</button>
 </form>
 

@@ -18,12 +18,14 @@ router.get('/settings', (req, res, next) => {
   const user = req.session.currentUser;
   Course.find()
     .then((courses) => {
-      console.log(courses)
-      User.find({ _id: user.id })
-        .populate('Course')
-        .then(() => { 
+      console.log('@@@@', courses);
+      console.log('%%%%%%%%%%%%%%', user._id);
+      User.find({ _id: user._id })
+        .populate('course', 'name')
+        .then((user) => {
+          console.log('######################', user[0].course);
           res.render('users/settings', { courses, user });
-        })
+        });
     })
     .catch((err) => {
       console.log(err);
