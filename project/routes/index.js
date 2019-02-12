@@ -1,10 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 const express = require('express');
-const location = require('../controllers/location');
-const loc = new location();
 
-const axios = require('axios');
 const router = express.Router();
 
 /* GET home page */
@@ -17,10 +14,6 @@ router.get('/geo', (req, res, next) => {
 });
 
 router.post('/geo', (req, res, next) => {
-  console.log('a')
-  navigator.geolocation.getCurrentPosition((position) => {
-    console.log( position.coords.longitude);
-  });
 
   let { street, number, city } = req.body;
   console.log(req.body.current)

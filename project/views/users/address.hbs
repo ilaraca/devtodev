@@ -1,0 +1,18 @@
+<form action="/user/settings/address" method="POST"></form>
+  <div>
+    <label for="street">Street</label>
+    <input type="text" name='street'>
+    <label for="number">Number</label>
+    <input type="text" name="number">
+    <label for="city">City</label>
+    <input type="text" name="city">
+  </div>
+  
+  <label>Add Courses</label>
+  {{#each courses}}
+    <label for="course">{{this.name}}</label>
+    <input type="checkbox" name="course" value="{{this.id}}">
+  {{/each}}
+
+  <button type="submit">Add Address</button>
+</form>

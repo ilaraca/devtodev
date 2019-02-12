@@ -1,29 +1,24 @@
 const mongoose = require('mongoose');
-const Course = require('../models/Courses');
+const Course = require('../models/Course');
 
 const dbName = 'devtodev-project';
 mongoose.connect(`mongodb://localhost/${dbName}`);
 
 const courses = [
   {
-    name: 'Javascript',
-    iduser: []
+    name: 'Javascript'
   },
   {
-    name: 'Phyton',
-    iduser: []
+    name: 'Phyton'
   },
   {
-    name: 'Cobol',
-    iduser: []
+    name: 'Cobol'
   },
   {
-    name: 'HTML',
-    iduser: []
+    name: 'HTML'
   },
   {
-    name: 'CSS',
-    iduser: []
+    name: 'CSS'
   }
 ];
 
