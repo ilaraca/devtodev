@@ -1,5 +1,14 @@
 <p> Welcome to {{ title }}. </p>
 
+<h2> Find a Course </h2>
+
+<form action="/courses" method="GET">
+  <div>
+    <label for="course"> Courses: </label>
+    <input type="course" name="course" value="{{course.name}}">
+    <button href="/courses">Find</button>
+  </div>
+
 {{#if isUserLoggedIn}}
   <p> Hello, {{ currentUserInfo.name }}. </p>
 {{/if}}

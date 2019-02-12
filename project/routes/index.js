@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
 const express = require('express');
 
 const router = express.Router();
@@ -8,6 +6,7 @@ const router = express.Router();
 router.get('/', (req, res, next) => {
   res.render('index');
 });
+
 
 router.get('/geo', (req, res, next) => {
   res.render('geo');

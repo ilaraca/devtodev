@@ -66,17 +66,18 @@ app.use((req, res, next) => {
   } else {
     res.locals.isUserLoggedIn = false;
   }
-
   next();
 });
 
 
 const index = require('./routes/index');
 const authRoutes = require('./routes/auth');
+const courseRoutes = require('./routes/courses');
 const user = require('./routes/usersettings');
 
 app.use('/', index);
 app.use('/', authRoutes);
+app.use('/', courseRoutes);
 app.use('/user', user);
 
 module.exports = app;
