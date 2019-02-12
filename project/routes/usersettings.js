@@ -18,7 +18,12 @@ router.get('/settings', (req, res, next) => {
   const user = req.session.currentUser;
   Course.find()
     .then((courses) => {
-      res.render('users/settings', { courses, user });
+      console.log(courses)
+      User.find({ _id: user.id })
+        .populate('Course')
+        .then(() => { 
+          res.render('users/settings', { courses, user });
+        })
     })
     .catch((err) => {
       console.log(err);
@@ -29,19 +34,31 @@ router.post('/settings', (req, res, next) => {
   const userId = req.session.currentUser._id;
   const { name, email } = req.body;
   const courses = req.body.course;
-  User.findByIdAndUpdate({ _id: userId }, { $set: { name, email } })
-    .then(() => {
-      console.log(courses);
-      courses.forEach((course) => {
-        Course.findByIdAndUpdate({ _id: course }, { $push: { user: userId } })
+  if (typeof courses !== 'string') {
+    courses.forEach((course) => {
+      User.findByIdAndUpdate({ _id: userId }, { $set: { name, email, course: [] } })
+        .then(() => {
+          User.findByIdAndUpdate({ _id: userId }, { $push: { course } })
+            .then(() => {
+              res.redirect('/');
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  } else {
+    User.findByIdAndUpdate({ _id: userId }, { $set: { name, email, course: [] } })
+      .then(() => {
+        User.findByIdAndUpdate({ _id: userId }, { $push: { courses } })
           .then(() => {
             res.redirect('/');
-          })
-          .catch((err) => {
-            console.log(err);
           });
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    });
+  }
 });
 
 module.exports = router;
