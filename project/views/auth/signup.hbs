@@ -6,7 +6,7 @@
   </p>
 {{/if}} --}}
 
-<form action="/signup" method="post">
+<form action="/signup" method="post" enctype="multipart/form-data">
   <div>
     <label for="name-input"> Name </label>
     <input type="text" name="name" id="name-input"
@@ -17,6 +17,11 @@
     <label for="email-input"> Email </label>
     <input type="email" name="email" id="email-input"
       placeholder="e.g., diana@themyscira.agency">
+  </div>
+
+  <div>
+    <label for="photo"> Profile photo </label>
+    <input type="file" name="photo">
   </div>
 
   <div>

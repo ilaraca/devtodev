@@ -5,7 +5,7 @@
     {{ errorMessage }}
   </p>
 {{/if}}
-<form action="/user/settings" method="post">
+<form action="/user/settings" method="post" enctype="multipart/form-data">
   <div>
     <label for="name"> Name: </label>
     <input type="name" name="name" value="{{user.name}}">
@@ -16,12 +16,24 @@
     <input type="email" name="email" value="{{user.email}}">
   </div>
 
-  {{#each courses }}
-    <div>
-        <input type="checkbox" value="{{this.id}}" name="course" >
-        <label for="course">{{this.name}}</label>
-    </div>
-  {{/each}}
+  <div>
+    <label for="photo"> Profile photo </label>
+    <img src="{{user.imgPath}}" alt="" width="10%">
+    <input type="file" name="photo">
+  </div>
+
+{{#each user.course}}
+  <div>
+    <input type="checkbox" value="{{this.id}}" name="course" checked>
+    <label for="course">{{this.name}}</label>
+  </div>
+{{/each}}
+{{#each coursesOut }}
+  <div>
+    <input type="checkbox" value="{{this.id}}" name="course" >
+    <label for="course">{{this.name}}</label>
+  </div>
+{{/each}}
 
   <button>Update</button>
 </form>

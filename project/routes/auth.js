@@ -1,8 +1,8 @@
 const express = require('express');
-
 const bcrypt = require('bcrypt');
-
 const User = require('../models/User');
+const multer = require('multer');
+const upload = multer({ dest: './public/uploads/' });
 
 const router = express.Router();
 
@@ -14,10 +14,11 @@ router.get('/signup', (req, res, next) => {
   });
 });
 
-router.post('/signup', (req, res, next) => {
+router.post('/signup', upload.single('photo'), (req, res, next) => {
   const nameInput = req.body.name;
   const emailInput = req.body.email;
   const passwordInput = req.body.password;
+  const imgPath = `/uploads/${req.file.filename}`;
 
   if (emailInput === '' || passwordInput === '') {
     res.render('auth/signup', {
@@ -45,7 +46,8 @@ router.post('/signup', (req, res, next) => {
     const userSubmission = {
       name: nameInput,
       email: emailInput,
-      password: hashedPass
+      password: hashedPass,
+      imgPath
     };
 
     const theUser = new User(userSubmission);
