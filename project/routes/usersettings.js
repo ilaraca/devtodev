@@ -2,8 +2,6 @@ const express = require('express');
 
 const User = require('../models/User');
 
-// const LaundryPickup = require('../models/laundry-pickup');
-
 const router = express.Router();
 
 router.use((req, res, next) => {
@@ -16,95 +14,99 @@ router.use((req, res, next) => {
 });
 
 router.get('/usersettings', (req, res, next) => {
-  let query;
-
-  if (req.session.currentUser.isLaunderer) {
-    query = { usersettings: req.session.currentUser._id };
-  } else {
-    query = { user: req.session.currentUser._id };
-  }
-
-  Course
-    .find(query)
-    .populate('user', 'name')
-    .populate('launderer', 'name')
-    .sort('pickupDate')
-    .exec((err, pickupDocs) => {
-      if (err) {
-        next(err);
-        return;
-      }
-
-      res.render('laundry/dashboard', {
-        pickups: pickupDocs
-      });
-    });
-});
-
-router.post('/launderers', (req, res, next) => {
-  const userId = req.session.currentUser._id;
-  const laundererInfo = {
-    fee: req.body.fee,
-    isLaunderer: true
-  };
-
-  User.findByIdAndUpdate(userId, laundererInfo, { new: true }, (err, theUser) => {
-    if (err) {
-      next(err);
-      return;
-    }
-
-    req.session.currentUser = theUser;
-
-    res.redirect('/dashboard');
+  res.render('user/usersettings', {
+    errorMessage: 'iau'
   });
 });
+//   let query;
 
-router.get('/launderers', (req, res, next) => {
-  User.find({ isLaunderer: true }, (err, launderersList) => {
-    if (err) {
-      next(err);
-      return;
-    }
+//   if (req.session.currentUser.isLaunderer) {
+//     query = { usersettings: req.session.currentUser._id };
+//   } else {
+//     query = { user: req.session.currentUser._id };
+//   }
 
-    res.render('laundry/launderers', {
-      launderers: launderersList
-    });
-  });
-});
+  //   Course
+  //     .find(query)
+  //     .populate('user', 'name')
+  //     .populate('launderer', 'name')
+  //     .sort('pickupDate')
+  //     .exec((err, pickupDocs) => {
+  //       if (err) {
+  //         next(err);
+  //         return;
+  //       }
 
-router.get('/launderers/:id', (req, res, next) => {
-  const laundererId = req.params.id;
+//       res.render('laundry/dashboard', {
+//         pickups: pickupDocs
+//       });
+//     });
+// });
 
-  User.findById(laundererId, (err, theUser) => {
-    if (err) {
-      next(err);
-      return;
-    }
+// router.post('/launderers', (req, res, next) => {
+//   const userId = req.session.currentUser._id;
+//   const laundererInfo = {
+//     fee: req.body.fee,
+//     isLaunderer: true
+//   };
 
-    res.render('laundry/launderer-profile', {
-      theLaunderer: theUser
-    });
-  });
-});
+//   User.findByIdAndUpdate(userId, laundererInfo, { new: true }, (err, theUser) => {
+//     if (err) {
+//       next(err);
+//       return;
+//     }
 
-router.post('/laundry-pickups', (req, res, next) => {
-  const pickupInfo = {
-    pickupDate: req.body.pickupDate,
-    launderer: req.body.laundererId,
-    user: req.session.currentUser._id
-  };
+//     req.session.currentUser = theUser;
 
-  const thePickup = new LaundryPickup(pickupInfo);
+//     res.redirect('/usersettings');
+//   });
+// });
 
-  thePickup.save((err) => {
-    if (err) {
-      next(err);
-      return;
-    }
+// router.get('/usersettings', (req, res, next) => {
+//   User.find({ isLaunderer: true }, (err, CoursesList) => {
+//     if (err) {
+//       next(err);
+//       return;
+//     }
 
-    res.redirect('/dashboard');
-  });
-});
+//     res.render('users/usersettings', {
+//       courses: CoursesList
+//     });
+//   });
+// });
+
+// router.get('/users/:id', (req, res, next) => {
+//   const laundererId = req.params.id;
+
+//   User.findById(laundererId, (err, theUser) => {
+//     if (err) {
+//       next(err);
+//       return;
+//     }
+
+//     res.render('laundry/launderer-profile', {
+//       theLaunderer: theUser
+//     });
+//   });
+// });
+
+// router.post('/laundry-pickups', (req, res, next) => {
+//   const pickupInfo = {
+//     pickupDate: req.body.pickupDate,
+//     launderer: req.body.laundererId,
+//     user: req.session.currentUser._id
+//   };
+
+//   const thePickup = new LaundryPickup(pickupInfo);
+
+//   thePickup.save((err) => {
+//     if (err) {
+//       next(err);
+//       return;
+//     }
+
+//     res.redirect('/dashboard');
+//   });
+// });
 
 module.exports = router;
