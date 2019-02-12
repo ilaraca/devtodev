@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const courseSchema = new Schema({
   name: String,
-  iduser: [{ type: Schema.Types.ObjectId, ref: 'User' }]
+  user: [{ type: Schema.Types.ObjectId, ref: 'User' }]
 });
 
 courseSchema.set('timestamps', true);

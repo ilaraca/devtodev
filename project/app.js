@@ -1,13 +1,13 @@
+/* eslint-disable no-unused-vars */
 require('dotenv').config();
 
-const bodyParser   = require('body-parser');
-const mongoose     = require('mongoose');
-const express      = require('express');
-const favicon      = require('serve-favicon');
-const hbs          = require('hbs');
-// const cookieParser = require('cookie-parser');
-const logger       = require('morgan');
-const path         = require('path');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const express = require('express');
+const favicon = require('serve-favicon');
+const hbs = require('hbs');
+const logger = require('morgan');
+const path = require('path');
 
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
@@ -15,7 +15,7 @@ const MongoStore = require('connect-mongo')(session);
 
 mongoose.Promise = Promise;
 mongoose
-  .connect('mongodb://localhost/devtodev-project', { useMongoClient: true })
+  .connect('mongodb://localhost/devtodev-project', { useNewUrlParser: true })
   .then(() => {
     console.log('Connected to Mongo!');
   }).catch((err) => {
@@ -31,12 +31,11 @@ const app = express();
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(cookieParser());
 
 // Express View engine setup
 
 app.use(require('node-sass-middleware')({
-  src:  path.join(__dirname, 'public'),
+  src: path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),
   sourceMap: true
 }));
@@ -50,7 +49,7 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 app.locals.title = 'DevToDev - Generated with IronHackers';
 
 app.use(session({
-  secret: 'never do your own laundry again',
+  secret: 'dev-to',
   resave: true,
   saveUninitialized: true,
   cookie: { maxAge: 60000 },
@@ -67,16 +66,18 @@ app.use((req, res, next) => {
   } else {
     res.locals.isUserLoggedIn = false;
   }
-
   next();
 });
 
 
 const index = require('./routes/index');
 const authRoutes = require('./routes/auth');
+const courseRoutes = require('./routes/courses');
+const user = require('./routes/usersettings');
 
 app.use('/', index);
 app.use('/', authRoutes);
-
+app.use('/', courseRoutes);
+app.use('/user', user);
 
 module.exports = app;

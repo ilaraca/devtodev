@@ -1,0 +1,30 @@
+<h3> User Settings </h3>
+
+{{#if errorMessage}}
+  <p class="error-message">
+    {{ errorMessage }}
+  </p>
+{{/if}}
+<form action="/user/settings" method="post">
+  <div>
+    <label for="name"> Name: </label>
+    <input type="name" name="name" value="{{user.name}}">
+  </div>
+
+  <div>
+    <label for="email"> Email </label>
+    <input type="email" name="email" value="{{user.email}}">
+  </div>
+
+  {{#each courses}}
+    <div>
+      <label for="course">{{this.name}}</label>
+      <input type="checkbox" value="{{this.id}}" name="course">
+    </div>
+  {{/each}}
+  
+  <button>Update</button>
+</form>
+
+
+  
