@@ -2,11 +2,24 @@ const express = require('express');
 
 const router = express.Router();
 
+const Course = require('../models/Course');
+
 /* GET home page */
-router.get('/', (req, res, next) => {
-  res.render('index');
+
+router.get('/', (req, res) => {
+  Course.find({}, { _id: 0, name: 1 })
+    .then((courses) => {
+      res.render('index', { courses });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
+// router.post('/', (req, res, next) => {
+//   console.log(req.params, '#####', req.body);
+//   res.render('courses/courses');
+// });
 
 router.get('/geo', (req, res, next) => {
   res.render('geo');

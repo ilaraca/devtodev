@@ -3,11 +3,15 @@
 <h2> Find a Course </h2>
 
 <form action="/courses" method="GET">
-  <div>
-    <label for="course"> Courses: </label>
-    <input type="course" name="course" value="{{course.name}}">
-    <button href="/courses">Find</button>
+  <div>     
+    <select name="course">
+    {{#each courses}}
+      <option value="{{this.name}}">{{this.name}}</option>
+    {{/each}}
+    </select>
+    <button>Find</button>
   </div>
+</form>
 
 {{#if isUserLoggedIn}}
   <p> Hello, {{ currentUserInfo.name }}. </p>

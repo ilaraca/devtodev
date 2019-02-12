@@ -1,11 +1,12 @@
 <div class="container">
 <a href="/">Go Back</a>
-{{!-- <h2>{{courses.this.user}}</h2> --}}
-<h4>Courses</h4>
-<ul> 
   {{#each courses}}
-  <li>{{this.name}}</li>
+    {{!-- <h4>{{this.name}}</h4> --}}
+    <ul>
+      {{#each courses.user}}
+      <li>{{this}}</li>
+      {{/each}}  
+    </ul>
   {{/each}}
-</ul>
-
+<h4>Courses</h4>
 </div>
