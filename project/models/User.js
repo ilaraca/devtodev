@@ -6,7 +6,7 @@ const userSchema = new Schema({
   name: String,
   email: String,
   password: String,
-  location: { lat: String, long: String, street: String, number: Number, city: String }
+  course: [{ type: Schema.Types.ObjectId, ref: 'course' }]
 });
 
 userSchema.set('timestamps', true);

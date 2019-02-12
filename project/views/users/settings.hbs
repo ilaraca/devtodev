@@ -16,10 +16,11 @@
     <input type="email" name="email" value="{{user.email}}">
   </div>
 
-  {{#each courses}}
+  {{#each courses }}
     <div>
-      <label for="course">{{this.name}}</label>
-      <input type="checkbox" value="{{this.id}}" name="course">
+        <label for="course">{{courses.name}}, {{user.course}}</label>
+        <input type="checkbox" value="{{courses.id}}" name="course" >
+    {{/each}}
     </div>
   {{/each}}
   
