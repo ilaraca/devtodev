@@ -1,6 +1,5 @@
 const express = require('express');
 const multer = require('multer');
-const Location = require('../controllers/location');
 const User = require('../models/User');
 const Course = require('../models/Course');
 const Comment = require('../models/Comment');
@@ -40,7 +39,6 @@ router.post('/settings', upload.single('photo'), (req, res, next) => {
 
   const { name, email, github, linkedin, description } = req.body;
   const courses = req.body.course;
-
   const imgPath = `/uploads/${req.file.filename}`;
   const imgName = req.file.originalname;
 
@@ -60,7 +58,7 @@ router.post('/settings', upload.single('photo'), (req, res, next) => {
   } else {
     User.findByIdAndUpdate({ _id: userId }, { $set: { name, email, course: [], imgPath, imgName, github, linkedin, description } })
       .then(() => {
-        User.findByIdAndUpdate({ _id: userId }, { $push: { courses } })
+        User.findByIdAndUpdate({ _id: userId }, { $push: { course: courses } })
           .then(() => {
             res.redirect('/');
           });
@@ -100,7 +98,6 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/:id', (req, res, next) => {
-  console.log('ads');
   const teacher = req.params.id;
   const student = req.session.currentUser._id;
   const content = req.body.comment;

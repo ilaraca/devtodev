@@ -14,12 +14,10 @@ router.get('/signup', (req, res, next) => {
   });
 });
 
-router.post('/signup', upload.single('photo'), (req, res, next) => {
+router.post('/signup', (req, res, next) => {
   const nameInput = req.body.name;
   const emailInput = req.body.email;
   const passwordInput = req.body.password;
-  const imgPath = `/uploads/${req.file.filename}`;
-  const imgName = req.file.originalname;
 
   if (emailInput === '' || passwordInput === '') {
     res.render('auth/signup', {
@@ -47,9 +45,7 @@ router.post('/signup', upload.single('photo'), (req, res, next) => {
     const userSubmission = {
       name: nameInput,
       email: emailInput,
-      password: hashedPass,
-      imgPath,
-      imgName
+      password: hashedPass
     };
 
     const theUser = new User(userSubmission);
@@ -76,7 +72,7 @@ router.get('/login', (req, res, next) => {
 router.post('/login', (req, res, next) => {
   const emailInput = req.body.email;
   const passwordInput = req.body.password;
-
+  console.log(emailInput, passwordInput)
   if (emailInput === '' || passwordInput === '') {
     res.render('auth/login', {
       errorMessage: 'Enter both email and password to log in.'

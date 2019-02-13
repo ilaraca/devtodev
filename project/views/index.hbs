@@ -1,27 +1,16 @@
-<p> Welcome to {{ title }}. </p>
+<div class="bg">
+  <div class="container top-center">
+    <div class="title">
+      <h1> Find a Course </h1>
+    </div>
 
-<h2> Find a Course </h2>
+    <form action="/courses" method="GET">
+      <div class="input-group mb-3">
+        <input type="course" class="form-control" name="course" value="{{course.name}}">
+      </div>
+      <button class="btn btn-primary" type="submit">Filter</button>
+    </form>
 
-<form action="/courses" method="GET">
-  <div>
-    <label for="course"> Courses: </label>
-    <input type="course" name="course" value="{{course.name}}">
-    <button href="/courses">Find</button>
   </div>
-
-{{#if isUserLoggedIn}}
-  <p> Hello, {{ currentUserInfo.name }}. </p>
-{{/if}}
-
-<nav>
-  <ul>
-    {{#if isUserLoggedIn}}
-     <li> <a href="/user/settings"> User Settings </a> </li>
-      {{!-- <li> <a href="/dashboard"> See Dashboard </a> </li> --}}
-      <li> <a href="/logout"> Log Out </a> </li>
-    {{else}}
-      <li> <a href="/signup"> Sign Up </a> </li>
-      <li> <a href="/login"> Log In </a> </li>
-    {{/if}}
-  </ul>
+</div>
 
