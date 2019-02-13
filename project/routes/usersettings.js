@@ -42,7 +42,7 @@ router.post('/settings', upload.single('photo'), (req, res, next) => {
   const courses = req.body.course;
 
   const imgPath = `/uploads/${req.file.filename}`;
-  const imgName = req.file.filename;
+  const imgName = req.file.originalname;
 
   if (typeof courses !== 'string') {
     courses.forEach((course) => {
