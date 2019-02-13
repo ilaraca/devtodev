@@ -8,21 +8,28 @@ const router = express.Router();
 
 router.get('/courses', (req, res, next) => {
   const { course } = req.query;
+  // const user = '';
   Course.find({ name: course })
-    .then((courses) => {
-      console.log('+++++++++', course);
-      res.render('courses/course', { courses });
+    .populate({
+      path: 'user',
+      populate: { path: 'user' }
+    })
+    .then((course) => {
+      console.log('-------', course);
+      // res.render('courses/course', { courses });
     });
 });
 
-// router.get('/settings', (req, res, next) => {
-//   const user = req.session.currentUser;
-//   Course.find()
+// router.get('/courses', (req, res, next) => {
+//   const { course } = req.query
 //     .then((courses) => {
-//       User.find({ _id: user._id })
+//       Course.find({ name: course.name })
+//       console.log('lalalalala', course)
 //         .populate('course', 'name')
-//         .then((userId) => {
-//           res.render('users/settings', { courses, user });
+//         .then((user) => {
+//           const userId = user[0];
+//           console.log(userId);
+//           console.log('iaaaaau', course);
 //         });
 //     })
 //     .catch((err) => {

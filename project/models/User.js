@@ -6,7 +6,8 @@ const userSchema = new Schema({
   name: String,
   email: String,
   password: String,
-  course: [{ type: Schema.Types.ObjectId, ref: 'Course' }]
+  course: [{ type: Schema.Types.ObjectId, ref: 'Course' }],
+  imgPath: String
 });
 
 userSchema.set('timestamps', true);
