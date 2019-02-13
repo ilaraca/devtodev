@@ -1,0 +1,11 @@
+  {{#each comments}}
+    {{#each ../students}}
+      <h3>{{name}}</h3>
+      <img src="{{imgPath}}" alt="" width="10%">
+      <p>{{../content }}</p>
+    {{/each}}
+  {{/each}}
+  <form action="/user/{{teacher.id}}" method="POST">
+    <input type="text" name="comment">
+    <button type="submit">comment</button>
+  </form>

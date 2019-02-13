@@ -5,6 +5,7 @@
     {{ errorMessage }}
   </p>
 {{/if}}
+<a href="/user/{{user.id}}">user page</a>
 <form action="/user/settings" method="post" enctype="multipart/form-data">
   <div>
     <label for="name"> Name: </label>
@@ -17,9 +18,24 @@
   </div>
 
   <div>
-    <label for="photo"> Profile photo </label>
+    <label for="linkedin"> LinkedIn </label>
+    <input type="text" name="linkedin" value="{{user.linkedin}}">
+  </div>
+
+  <div>
+    <label for="github"> GitHub </label>
+    <input type="text" name="github" value="{{user.github}}">
+  </div>
+
+  <div>
+    <label for="description"> Description </label>
+    <textarea name="description" value="{{user.description}}" row='10' cols="40"></textarea>
+  </div>
+  
+  <div>
+    <label for="photo"> Profile pictures </label>
     <img src="{{user.imgPath}}" alt="" width="10%">
-    <input type="file" name="photo">
+    <input type="file" name="photo" value="{{user.imgName}}">
   </div>
 
 {{#each user.course}}

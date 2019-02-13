@@ -51,12 +51,7 @@ app.locals.title = 'DevToDev - Generated with IronHackers';
 app.use(session({
   secret: 'dev-to',
   resave: true,
-  saveUninitialized: true,
-  cookie: { maxAge: 60000 },
-  store: new MongoStore({
-    mongooseConnection: mongoose.connection,
-    ttl: 24 * 60 * 60 // 1 day
-  })
+  saveUninitialized: true
 }));
 
 app.use((req, res, next) => {

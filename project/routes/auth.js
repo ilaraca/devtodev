@@ -19,6 +19,7 @@ router.post('/signup', upload.single('photo'), (req, res, next) => {
   const emailInput = req.body.email;
   const passwordInput = req.body.password;
   const imgPath = `/uploads/${req.file.filename}`;
+  const imgName = req.file.originalname;
 
   if (emailInput === '' || passwordInput === '') {
     res.render('auth/signup', {
@@ -47,7 +48,8 @@ router.post('/signup', upload.single('photo'), (req, res, next) => {
       name: nameInput,
       email: emailInput,
       password: hashedPass,
-      imgPath
+      imgPath,
+      imgName
     };
 
     const theUser = new User(userSubmission);
