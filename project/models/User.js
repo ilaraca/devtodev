@@ -7,7 +7,12 @@ const userSchema = new Schema({
   email: String,
   password: String,
   course: [{ type: Schema.Types.ObjectId, ref: 'Course' }],
-  imgPath: String
+  comment: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
+  imgPath: String,
+  imgName: String,
+  linkedin: String,
+  github: String,
+  description: String
 });
 
 userSchema.set('timestamps', true);
