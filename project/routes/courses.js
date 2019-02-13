@@ -1,18 +1,19 @@
 const express = require('express');
-const Course = require('../models/Course.js');
+
+const User = require('../models/User.js');
 
 const router = express.Router();
 
-/* GET Course page */
 router.get('/courses', (req, res) => {
-  Course.find()
-    .then((courses) => {
-      res.render('courses/course', { courses });
+  const userId = req.query.course;
+  User.find({ course: userId })
+    .then((users) => {
+      console.log('truta', users);
+      res.render('courses/course', { users });
     })
     .catch((error) => {
       console.log(error);
     });
 });
-//
 
 module.exports = router;

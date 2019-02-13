@@ -6,11 +6,14 @@
 
     <form action="/courses" method="GET">
       <div class="input-group mb-3">
-        <input type="course" class="form-control" name="course" value="{{course.name}}">
+        <select class="custom-select" name="course">
+          {{#each courses}}
+            <option value="{{this._id}}">{{this.name}}</option>
+          {{/each}}
+        </select>
       </div>
       <button class="btn btn-primary" type="submit">Filter</button>
     </form>
-
   </div>
 </div>
 
