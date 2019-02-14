@@ -1,0 +1,73 @@
+{{#if errorMessage}}
+  <p class="error-message">
+    {{ errorMessage }}
+  </p>
+{{/if}}
+
+<div class="row mt-5 justify-content-md-center ">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title text-center">Settings</h5>
+            <form action="/user/settings" method="post" enctype="multipart/form-data">
+
+              <div class="form-group">
+                <label for="name"> Name </label>
+                <input type="text" class="form-control" placeholder="Enter name" name="name" value="{{user.name}}">
+              </div>
+
+              <div class="form-group">
+                <label for="email"> Email </label>
+                <input type="email" class="form-control" placeholder="Enter email" name="email" value="{{user.email}}">
+              </div>
+
+              <div class="form-group">
+                <label for="linkedin"> LinkedIN </label>
+                <input type="text" class="form-control" placeholder="Enter LinkedIn" name="linkedin" value="{{user.linkedin}}">
+              </div>
+
+              <div class="form-group">
+                <label for="github"> GitHub </label>
+                <input type="text" class="form-control" placeholder="Enter GitHub" name="github" value="{{user.github}}">
+              </div>
+
+              <div class="form-group mb-3">
+                  <label name='photo' >Choose file {{user.imgName}}</label>
+                  <input type="file" name='photo'>
+              </div>
+
+              <div class="form-group">
+                <label for="description"> Description </label>
+                <input type="text" class="form-control" placeholder="Enter description" name="description" value="{{user.description}}">
+              </div>
+              
+              <p>
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  Add new course
+                </a>
+              </p>
+              <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                  {{#each user.course}}
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" value="{{this.id}}" name="course" checked>
+                      <label for="course">{{this.name}}</label>
+                    </div>
+                  {{/each}}
+                  {{#each coursesOut }}
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" value="{{this.id}}" name="course" >
+                      <label for="course">{{this.name}}</label>
+                    </div>
+                  {{/each}}
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary"> Update </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  
