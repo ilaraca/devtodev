@@ -1,13 +1,61 @@
-  {{#each comments}}
-    {{#each ../students}}
-      <h3>{{name}}</h3>
-      <img src="{{imgPath}}" alt="" width="10%">
-      <p>{{../content }}</p>
-    {{/each}}
-  {{/each}}
-  <form action="/user/{{teacher.id}}" method="POST">
-    <input type="text" name="comment">
-    <button type="submit">comment</button>
-  </form>
+<div class="container mt-5">
+  <div class="row justify-content-between">
+    <div class="col-md-3">
+      <div class="card" style="width: 18rem;">
+        <img src="{{teacher.imgPath}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{teacher.name}}</h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{teacher.description}}</li>
+            {{#if teacher.github}}
+              <li class="list-group-item">
+                  <a href="{{teacher.github}}">{{teacher.github}}</a>
+              </li>
+            {{/if}}
+            {{#if teacher.linkedin}}
+              <li class="list-group-item">
+                  <a href="{{teacher.linkedin}}">{{teacher.linkedin}}</a>
+              </li>
+            {{/if}}
+            <li class="list-group-item">
+                <a href="{{teacher.email}}">{{teacher.email}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-7 ">
+      <form action="/user/{{teacher.id}}" method="POST">
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Comment</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" name="comment" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">comment</button>
+      </form>
+      <div class="mt-5">
 
+      <h3>Comments:</h3>
+        {{#each students}}
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="{{student.imgPath}}" class="img img-rounded img-fluid"/>
+                </div>
+                <div class="col-md-10">
+                    <p>
+                        <strong>{{student.name}}</strong></a>
+                    </p>
+                    <div class="clearfix"></div>
+                    <p>{{content}}</p>
+                </div>
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>
+    
   

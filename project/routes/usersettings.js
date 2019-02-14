@@ -41,7 +41,6 @@ router.post('/settings', upload.single('photo'), (req, res, next) => {
   const courses = req.body.course;
   const imgPath = `/uploads/${req.file.filename}`;
   const imgName = req.file.originalname;
-  console.log(description)
 
   if (typeof courses !== 'string') {
     courses.forEach((course) => {
@@ -85,7 +84,8 @@ router.get('/:id', (req, res, next) => {
         promise.push(Comment.find({ _id: comment.id })
           .populate('student')
           .then((com) => {
-            students.push(com[0].student);
+            students.push(com[0]);
+            console.log(students)
           }));
       });
     })
@@ -93,12 +93,13 @@ router.get('/:id', (req, res, next) => {
       Promise.all(promise)
         .then(() => {
           console.log(students)
-          res.render('users/index', { comments, teacher, students });
+          res.render('users/index', { teacher, students });
         })
     });
 });
 
 router.post('/:id', (req, res, next) => {
+  console.log('ads');
   const teacher = req.params.id;
   const student = req.session.currentUser._id;
   const content = req.body.comment;
@@ -113,7 +114,7 @@ router.post('/:id', (req, res, next) => {
 
   User.findByIdAndUpdate({ _id: teacher }, { $push: { comment: newComment.id } })
     .then(() => {
-      res.redirect('/');
+      res.redirect(`/user/${teacher}`);
     });
 });
 
