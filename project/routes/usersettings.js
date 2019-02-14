@@ -101,6 +101,7 @@ router.get('/:id', (req, res, next) => {
 router.post('/:id', (req, res, next) => {
   console.log('ads');
   const teacher = req.params.id;
+  teacherId = req.params.id;
   const student = req.session.currentUser._id;
   const content = req.body.comment;
   const comments = {
@@ -117,5 +118,12 @@ router.post('/:id', (req, res, next) => {
       res.redirect(`/user/${teacher}`);
     });
 });
+
+router.get('/delete/:id', (req, res, next) => {
+  Comment.deleteOne({ _id: req.params.id })
+    .then(() => {
+      res.redirect(`/`);
+    });
+})
 
 module.exports = router;
