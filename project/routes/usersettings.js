@@ -74,7 +74,7 @@ router.get('/:id', (req, res, next) => {
   let comments;
   let teacher;
   const students = [];
-  const promise = []
+  const promise = [];
   User.find({ _id: id })
     .populate('comment')
     .then((user) => {
@@ -119,10 +119,10 @@ router.post('/:id', (req, res, next) => {
     });
 });
 
-router.get('/delete/:id', (req, res, next) => {
+router.get('/:teacherId/delete/:id', (req, res, next) => {
   Comment.deleteOne({ _id: req.params.id })
     .then(() => {
-      res.redirect(`/`);
+      res.redirect(`/user/${req.params.teacherId}`);
     });
 })
 
