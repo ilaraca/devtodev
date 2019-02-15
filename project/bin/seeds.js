@@ -19,6 +19,15 @@ const courses = [
   },
   {
     name: 'CSS'
+  },
+  {
+    name: 'C++'
+  },
+  {
+    name: 'Ruby on Rails'
+  },
+  {
+    name: 'PHP '
   }
 ];
 
