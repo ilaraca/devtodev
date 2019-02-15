@@ -1,16 +1,16 @@
-##Dev to Dev App 
+# Dev to Dev App 
 
-##introduction
+## introduction
 Educational site to connect people who want to learn programming with people who want to teach.
 
-##Getting Started
+## Getting Started
 The aplication is deployed in Heroku and can be acessed anytime by acessing the below link:
 
 
 Additional implementations and improvements
 Althouth the app is fully functional, improvements can be made to increase user's experience:
 
-##Stack
+## Stack
 * nodeJs
 * Express
 * mongoDB
